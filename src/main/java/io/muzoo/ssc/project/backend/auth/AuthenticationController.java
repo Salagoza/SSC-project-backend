@@ -22,7 +22,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/login")
-    public String login(HttpServletRequest request){
+    public SimpleResponseDTO login(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         try{
@@ -31,44 +31,39 @@ public class AuthenticationController {
                 request.logout();
             }
             request.login(username,password);
-            return AjaxUtils.convertToString(
-                    SimpleResponseDTO
+            return SimpleResponseDTO
                             .builder()
                             .success(true)
                             .message("Login successfully")
-                            .build()
-            );
+                            .build();
+
         }catch (ServletException e){
-            return AjaxUtils.convertToString(
+            return
                     SimpleResponseDTO
                             .builder()
                             .success(false)
                             .message("Incorrect username or password")
-                            .build()
-            );
+                            .build();
         }
     }
 
     @GetMapping("/api/logout")
-    public String logout(HttpServletRequest request, HttpSession session){
+    public SimpleResponseDTO logout(HttpServletRequest request, HttpSession session){
         try{
             request.logout();
-            return AjaxUtils.convertToString(
-                    SimpleResponseDTO
+            return SimpleResponseDTO
                             .builder()
                             .success(true)
                             .message("You are successfully logout")
-                            .build()
-            );
+                            .build();
+
 
         } catch (ServletException e) {
-            return AjaxUtils.convertToString(
-                    SimpleResponseDTO
+            return SimpleResponseDTO
                             .builder()
                             .success(false)
                             .message("Failed to Logout")
-                            .build()
-            );
+                            .build();
         }
     }
 

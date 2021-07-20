@@ -39,7 +39,7 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//configuring security for rest API
 		http.csrf().disable();
 		http.authorizeRequests()
-				.antMatchers("/","/api/login","/api/logout").permitAll();
+				.antMatchers("/","/api/login","/api/logout","/api/whoami").permitAll();
 		//permit all options request
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
 		// Handling error output as JSON
@@ -69,8 +69,8 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			String ajaxJson = AjaxUtils.convertToString(
 					SimpleResponseDTO
 							.builder()
-							.success(true)
-							.message("Failed to Logout")
+							.success(false)
+							.message("Forbidden")
 							.build()
 			);
 			response.setCharacterEncoding("UTF-8");
