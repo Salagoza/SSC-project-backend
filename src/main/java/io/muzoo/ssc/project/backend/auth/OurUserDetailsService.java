@@ -13,12 +13,18 @@ import org.springframework.stereotype.Service;
 public class OurUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserRepo userRepoitory;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if("admin".equals(username)){
-            return User.withUsername(username).password(passwordEncoder.encode("123456")).roles("USER").build();
+        io.muzoo.ssc.project.backend.User user = userRepoitory.findFirstByUserName(username);
+        System.out.println(user.getUserName());
+        System.out.println(user.getPassword());
+
+        if(user != null){
+            return User.withUsername(user.getUserName())
+                    .password(user.getPassword())
+                    .authorities("dfasdfasd").build();
         }else{
             throw new UsernameNotFoundException("Invalid username or password!!!!");
         }
