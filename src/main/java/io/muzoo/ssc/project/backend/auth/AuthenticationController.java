@@ -27,7 +27,9 @@ public class AuthenticationController {
         String password = request.getParameter("password");
         try{
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (principal != null && principal instanceof org.springframework.security.core.userdetails.User)
+            if (principal != null && principal instanceof org.springframework.security.core.userdetails.User){
+                request.logout();
+            }
             request.login(username,password);
             return AjaxUtils.convertToString(
                     SimpleResponseDTO
@@ -40,7 +42,7 @@ public class AuthenticationController {
             return AjaxUtils.convertToString(
                     SimpleResponseDTO
                             .builder()
-                            .success(true)
+                            .success(false)
                             .message("Incorrect username or password")
                             .build()
             );
@@ -63,12 +65,12 @@ public class AuthenticationController {
             return AjaxUtils.convertToString(
                     SimpleResponseDTO
                             .builder()
-                            .success(true)
+                            .success(false)
                             .message("Failed to Logout")
                             .build()
             );
         }
     }
 
-
+//fix login/logout response
 }
