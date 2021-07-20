@@ -1,7 +1,10 @@
 package io.muzoo.ssc.project.backend.auth;
 
 import io.muzoo.ssc.project.backend.SimpleResponseDTO;
+import io.muzoo.ssc.project.backend.User;
 import io.muzoo.ssc.project.backend.util.AjaxUtils;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,8 @@ public class AuthenticationController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         try{
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principal != null && principal instanceof org.springframework.security.core.userdetails.User)
             request.login(username,password);
             return AjaxUtils.convertToString(
                     SimpleResponseDTO
