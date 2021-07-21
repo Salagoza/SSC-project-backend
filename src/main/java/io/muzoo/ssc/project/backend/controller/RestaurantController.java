@@ -3,11 +3,11 @@ package io.muzoo.ssc.project.backend.controller;
 import io.muzoo.ssc.project.backend.entity.RestaurantEntity;
 import io.muzoo.ssc.project.backend.repository.RestaurantRepo;
 import io.muzoo.ssc.project.backend.request.CreateRestaurantRequest;
+import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
 import io.muzoo.ssc.project.backend.response.RestaurantResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.hibernate.sql.Delete;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -32,4 +32,16 @@ public class RestaurantController {
         restaurantResponse.setId(restaurant.getId());
         return restaurantResponse;
     }
+
+    @DeleteMapping("/api/restaurant/{restaurantId}")
+    public DeleteResponseDTO deleteRestaurant(@PathVariable("restaurantId") long restaurantId) {
+        DeleteResponseDTO deleteResponseDTO = new DeleteResponseDTO();
+        deleteResponseDTO.setId(restaurantId);
+        restaurantRepo.deleteById(restaurantId);
+        return deleteResponseDTO;
+    }
+
+
+
+
 }

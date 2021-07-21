@@ -54,7 +54,6 @@ public class AuthenticationController {
                             .message("You are successfully logout")
                             .build();
 
-
         } catch (ServletException e) {
             return SimpleResponseDTO
                             .builder()

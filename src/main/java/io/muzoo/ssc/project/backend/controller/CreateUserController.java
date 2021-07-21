@@ -1,9 +1,9 @@
 package io.muzoo.ssc.project.backend.controller;
 
 import io.muzoo.ssc.project.backend.request.CreateUserRequest;
-import io.muzoo.ssc.project.backend.UserEntity;
-import io.muzoo.ssc.project.backend.UserRepo;
-import io.muzoo.ssc.project.backend.response.DeleteUserResponseDTO;
+import io.muzoo.ssc.project.backend.entity.UserEntity;
+import io.muzoo.ssc.project.backend.repository.UserRepo;
+import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
 import io.muzoo.ssc.project.backend.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,8 +66,8 @@ public class CreateUserController {
     }
 
     @DeleteMapping("/api/user/{userid}")
-    public DeleteUserResponseDTO deleteUser(@PathVariable("userid") long userid) {
-        DeleteUserResponseDTO deleteUserResponse = new DeleteUserResponseDTO();
+    public DeleteResponseDTO deleteUser(@PathVariable("userid") long userid) {
+        DeleteResponseDTO deleteUserResponse = new DeleteResponseDTO();
         deleteUserResponse.setId(userid);
         userRepo.deleteById(userid);
         return deleteUserResponse;

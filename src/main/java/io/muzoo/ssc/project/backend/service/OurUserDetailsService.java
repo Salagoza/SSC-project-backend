@@ -1,7 +1,7 @@
 package io.muzoo.ssc.project.backend.service;
 
-import io.muzoo.ssc.project.backend.UserEntity;
-import io.muzoo.ssc.project.backend.UserRepo;
+import io.muzoo.ssc.project.backend.entity.UserEntity;
+import io.muzoo.ssc.project.backend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

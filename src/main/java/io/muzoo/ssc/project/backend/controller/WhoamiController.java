@@ -1,7 +1,7 @@
 package io.muzoo.ssc.project.backend.controller;
 
-import io.muzoo.ssc.project.backend.UserEntity;
-import io.muzoo.ssc.project.backend.UserRepo;
+import io.muzoo.ssc.project.backend.entity.UserEntity;
+import io.muzoo.ssc.project.backend.repository.UserRepo;
 import io.muzoo.ssc.project.backend.response.WhoamiDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

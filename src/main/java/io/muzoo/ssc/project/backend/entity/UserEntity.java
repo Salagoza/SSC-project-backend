@@ -1,4 +1,4 @@
-package io.muzoo.ssc.project.backend;
+package io.muzoo.ssc.project.backend.entity;
 
 import lombok.Data;
 import lombok.Getter;
