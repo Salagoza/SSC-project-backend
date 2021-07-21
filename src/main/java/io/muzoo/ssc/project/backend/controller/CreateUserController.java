@@ -38,6 +38,17 @@ public class CreateUserController {
         return userResponse;
     }
 
+    @GetMapping("/api/user/{userid}")
+    public UserResponse getUser(@PathVariable("userid") long userid) {
+
+        UserEntity user = userRepo.findById(userid).get();
+
+        UserResponse userResponse = new UserResponse();
+        userResponse.setUsername(user.getUserName());
+        userResponse.setId(user.getId());
+        return userResponse;
+    }
+
     @GetMapping("/api/user/list")
     public List<UserResponse> getUserList() {
 
@@ -61,4 +72,6 @@ public class CreateUserController {
         userRepo.deleteById(userid);
         return deleteUserResponse;
     }
+
+
 }
