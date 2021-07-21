@@ -1,8 +1,7 @@
 package io.muzoo.ssc.project.backend.init;
 
-import io.muzoo.ssc.project.backend.User;
+import io.muzoo.ssc.project.backend.UserEntity;
 import io.muzoo.ssc.project.backend.UserRepo;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,9 +20,9 @@ public class InitApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //adding default admin
-        User admin = userRepository.findFirstByUserName("admin");
+        UserEntity admin = userRepository.findFirstByUserName("admin");
         if(admin == null){
-            admin = new User();
+            admin = new UserEntity();
             admin.setUserName("admin");
             admin.setPassword(passwordEncoder.encode("123456"));
             //admin.setRole("USER");

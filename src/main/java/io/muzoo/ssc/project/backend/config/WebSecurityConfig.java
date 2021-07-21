@@ -1,7 +1,7 @@
 package io.muzoo.ssc.project.backend.config;
 
-import io.muzoo.ssc.project.backend.SimpleResponseDTO;
-import io.muzoo.ssc.project.backend.auth.OurUserDetailsService;
+import io.muzoo.ssc.project.backend.response.SimpleResponseDTO;
+import io.muzoo.ssc.project.backend.service.OurUserDetailsService;
 import io.muzoo.ssc.project.backend.util.AjaxUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,7 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//configuring security for rest API
 		http.csrf().disable();
 		http.authorizeRequests()
-				.antMatchers("/","/api/login","/api/logout","/api/whoami").permitAll();
+				.antMatchers("/","/api/login","/api/logout","/api/whoami","/api/user").permitAll();
 		//permit all options request
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
 		// Handling error output as JSON

@@ -66,6 +66,4 @@ public class AuthenticationController {
                             .build();
         }
     }
-
-//fix login/logout response
 }
