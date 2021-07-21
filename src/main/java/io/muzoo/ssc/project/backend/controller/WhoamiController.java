@@ -1,7 +1,8 @@
-package io.muzoo.ssc.project.backend.whoami;
+package io.muzoo.ssc.project.backend.controller;
 
-import io.muzoo.ssc.project.backend.User;
+import io.muzoo.ssc.project.backend.UserEntity;
 import io.muzoo.ssc.project.backend.UserRepo;
+import io.muzoo.ssc.project.backend.response.WhoamiDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class WhoamiController {
             if (principal != null && principal instanceof org.springframework.security.core.userdetails.User) {
                 //user logged in
                 org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
-                User u = userRepo.findFirstByUserName(user.getUsername());
+                UserEntity u = userRepo.findFirstByUserName(user.getUsername());
 
                 return WhoamiDTO.builder()
                         .loggedIn(true)

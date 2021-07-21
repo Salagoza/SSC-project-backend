@@ -1,4 +1,4 @@
-package io.muzoo.ssc.project.backend.whoami;
+package io.muzoo.ssc.project.backend.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

@@ -1,12 +1,10 @@
 package io.muzoo.ssc.project.backend.response;
 
-
 import lombok.Data;
 
 @Data
-public class UserResponse {
+public class DeleteUserResponseDTO {
 
-    private String username;
     private long id;
 
 }

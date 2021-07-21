@@ -1,9 +1,6 @@
-package io.muzoo.ssc.project.backend.auth;
+package io.muzoo.ssc.project.backend.controller;
 
-import io.muzoo.ssc.project.backend.SimpleResponseDTO;
-import io.muzoo.ssc.project.backend.User;
-import io.muzoo.ssc.project.backend.util.AjaxUtils;
-import org.springframework.security.core.context.SecurityContext;
+import io.muzoo.ssc.project.backend.response.SimpleResponseDTO;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
