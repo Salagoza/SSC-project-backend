@@ -6,10 +6,12 @@ import io.muzoo.ssc.project.backend.request.CreateRestaurantRequest;
 import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
 import io.muzoo.ssc.project.backend.response.RestaurantResponse;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,6 +41,26 @@ public class RestaurantController {
         deleteResponseDTO.setId(restaurantId);
         restaurantRepo.deleteById(restaurantId);
         return deleteResponseDTO;
+    }
+
+    @GetMapping("/api/restaurant/list")
+    public List<RestaurantResponse> getTop10RestaurantList() {
+
+        List<RestaurantEntity> restaurantEntities = restaurantRepo.findTop10ByOrderByIdAsc();
+        List<RestaurantResponse> restaurantResponses = new ArrayList<>();
+        for (int i = 0; i < restaurantEntities.size(); i++) {
+            RestaurantResponse restaurantResponse = new RestaurantResponse();
+            restaurantResponse.setId(restaurantEntities.get(i).getId());
+            restaurantResponse.setName(restaurantEntities.get(i).getName());
+            byte[] encodePhoto = Base64.getEncoder().encode(restaurantEntities.get(i).getPhoto());
+            restaurantResponse.setPhoto(encodePhoto);
+            restaurantResponse.setAddress(restaurantEntities.get(i).getAddress());
+
+            restaurantResponses.add(restaurantResponse);
+        }
+        // respond back to frontend
+
+        return restaurantResponses;
     }
 
 
