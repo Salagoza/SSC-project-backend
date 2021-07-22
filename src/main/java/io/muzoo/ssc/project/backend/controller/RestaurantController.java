@@ -2,8 +2,10 @@ package io.muzoo.ssc.project.backend.controller;
 
 import io.muzoo.ssc.project.backend.entity.RestaurantEntity;
 import io.muzoo.ssc.project.backend.repository.RestaurantRepo;
+import io.muzoo.ssc.project.backend.request.CreateRatingRequest;
 import io.muzoo.ssc.project.backend.request.CreateRestaurantRequest;
 import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
+import io.muzoo.ssc.project.backend.response.RatingResponse;
 import io.muzoo.ssc.project.backend.response.RestaurantResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +65,24 @@ public class RestaurantController {
         return restaurantResponses;
     }
 
+    @PostMapping("/api/restaurant/rate")
+    public RatingResponse Rating(@RequestBody CreateRatingRequest r ){
 
+        RestaurantEntity restaurant = restaurantRepo.findById(r.getId()).get();
+        if(restaurant.getRatingCount() == 0){
+            restaurant.setRating(r.getRating());
+            restaurant.setRatingCount(1);
+        }else{
+            double currRating = restaurant.getRating();
+            int currRatingCount = restaurant.getRatingCount();
+            double newRating = ((currRating * currRatingCount)+r.getRating())/ (restaurant.getRatingCount()+1);
 
-
+            restaurant.setRating(newRating);
+            restaurant.setRatingCount(restaurant.getRatingCount()+1);
+        }
+        restaurantRepo.save(restaurant);
+        RatingResponse ratingResponse = new RatingResponse();
+        ratingResponse.setMessage("Success");
+        return ratingResponse;
+    }
 }

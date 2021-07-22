@@ -1,9 +1,13 @@
 package io.muzoo.ssc.project.backend.controller;
 
+import io.muzoo.ssc.project.backend.entity.RestaurantEntity;
+import io.muzoo.ssc.project.backend.repository.RestaurantRepo;
+import io.muzoo.ssc.project.backend.request.CreateRatingRequest;
 import io.muzoo.ssc.project.backend.request.CreateUserRequest;
 import io.muzoo.ssc.project.backend.entity.UserEntity;
 import io.muzoo.ssc.project.backend.repository.UserRepo;
 import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
+import io.muzoo.ssc.project.backend.response.RatingResponse;
 import io.muzoo.ssc.project.backend.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -72,6 +76,5 @@ public class CreateUserController {
         userRepo.deleteById(userid);
         return deleteUserResponse;
     }
-
 
 }
