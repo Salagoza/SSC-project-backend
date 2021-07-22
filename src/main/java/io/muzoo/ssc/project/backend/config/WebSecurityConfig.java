@@ -39,7 +39,7 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//configuring security for rest API
 		http.csrf().disable();
 		http.authorizeRequests()
-				.antMatchers("/","/api/login","/api/logout","/api/whoami","/api/user").permitAll();
+				.antMatchers("/","/api/login","/api/logout","/api/whoami","/api/user","/api/restaurant/list").permitAll();
 		//permit all options request
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
 		// Handling error output as JSON
