@@ -2,14 +2,17 @@ package io.muzoo.ssc.project.backend.controller;
 
 import io.muzoo.ssc.project.backend.entity.RestaurantEntity;
 import io.muzoo.ssc.project.backend.repository.RestaurantRepo;
+import io.muzoo.ssc.project.backend.request.ChangePasswordRequest;
 import io.muzoo.ssc.project.backend.request.CreateRatingRequest;
 import io.muzoo.ssc.project.backend.request.CreateUserRequest;
 import io.muzoo.ssc.project.backend.entity.UserEntity;
 import io.muzoo.ssc.project.backend.repository.UserRepo;
+import io.muzoo.ssc.project.backend.response.ChangePasswordResponse;
 import io.muzoo.ssc.project.backend.response.DeleteResponseDTO;
 import io.muzoo.ssc.project.backend.response.RatingResponse;
 import io.muzoo.ssc.project.backend.response.UserResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,6 +78,20 @@ public class CreateUserController {
         deleteUserResponse.setId(userid);
         userRepo.deleteById(userid);
         return deleteUserResponse;
+    }
+
+    @PostMapping("/api/user/password")
+    public ChangePasswordResponse changePassword(@RequestBody ChangePasswordRequest r){
+
+        UserEntity user = userRepo.findFirstByUserName(r.getUsername());
+        if (BCrypt.checkpw(r.getPassword(),user.getPassword())){
+            String newPassword = r.getNewPassword();
+            user.setPassword(passwordEncoder.encode(newPassword));
+        }
+        userRepo.save(user);
+        ChangePasswordResponse changePasswordResponse = new ChangePasswordResponse();
+        changePasswordResponse.setMessage("Success!");
+        return changePasswordResponse;
     }
 
 }
