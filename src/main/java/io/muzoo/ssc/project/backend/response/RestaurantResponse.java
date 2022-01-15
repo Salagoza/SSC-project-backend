@@ -9,4 +9,5 @@ public class RestaurantResponse {
     private String name;
     private byte[] Photo;
     private String address;
+    private String description;
 }

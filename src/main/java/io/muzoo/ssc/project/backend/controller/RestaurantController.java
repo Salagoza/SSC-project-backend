@@ -26,7 +26,7 @@ public class RestaurantController {
         RestaurantEntity restaurant = new RestaurantEntity();
         // save restaurant details into database
         restaurant.setName(request.getName());
-        restaurant.setPhoto(request.getPhoto().getBytes());
+        restaurant.setPhoto(Base64.getEncoder().encode(request.getPhoto().getBytes()));
         restaurant.setDescription(request.getDescription());
         restaurant.setAddress(request.getAddress());
         restaurantRepo.save(restaurant);
@@ -54,14 +54,14 @@ public class RestaurantController {
             RestaurantResponse restaurantResponse = new RestaurantResponse();
             restaurantResponse.setId(restaurantEntities.get(i).getId());
             restaurantResponse.setName(restaurantEntities.get(i).getName());
-            byte[] encodePhoto = Base64.getEncoder().encode(restaurantEntities.get(i).getPhoto());
-            restaurantResponse.setPhoto(encodePhoto);
+            byte[] photo = restaurantEntities.get(i).getPhoto();
+            restaurantResponse.setPhoto(photo);
             restaurantResponse.setAddress(restaurantEntities.get(i).getAddress());
-
+            restaurantResponse.setDescription(restaurantEntities.get(i).getDescription());
             restaurantResponses.add(restaurantResponse);
         }
-        // respond back to frontend
 
+        // respond back to frontend
         return restaurantResponses;
     }
 

@@ -40,8 +40,8 @@ public class CreateUserController {
 
         // respond back to frontend
         UserResponse userResponse = new UserResponse();
-        userResponse.setUsername(user.getUserName());
-        userResponse.setId(user.getId());
+        userResponse.setFirstName(user.getFirstName());
+        userResponse.setLastName(user.getLastName());
         return userResponse;
     }
 
@@ -51,8 +51,9 @@ public class CreateUserController {
         UserEntity user = userRepo.findById(userid).get();
 
         UserResponse userResponse = new UserResponse();
-        userResponse.setUsername(user.getUserName());
-        userResponse.setId(user.getId());
+        userResponse.setFirstName(user.getFirstName());
+        userResponse.setLastName(user.getLastName());
+        userResponse.setDateOfBirth(user.getDateOfbirth());
         return userResponse;
     }
 
@@ -63,8 +64,9 @@ public class CreateUserController {
         List<UserResponse> userResponses = new ArrayList<>();
         for (int i = 0; i < userEntities.size(); i++) {
             UserResponse userResponse = new UserResponse();
-            userResponse.setUsername(userEntities.get(i).getUserName());
-            userResponse.setId(userEntities.get(i).getId());
+            userResponse.setFirstName(userEntities.get(i).getFirstName());
+            userResponse.setLastName(userEntities.get(i).getLastName());
+            userResponse.setDateOfBirth(userEntities.get(i).getDateOfbirth());
             userResponses.add(userResponse);
         }
 
