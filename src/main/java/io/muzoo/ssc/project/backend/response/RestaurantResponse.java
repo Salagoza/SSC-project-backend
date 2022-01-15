@@ -7,7 +7,7 @@ public class RestaurantResponse {
 
     private long id;
     private String name;
-    private byte[] Photo;
+    private String Photo;
     private String address;
     private String description;
 }
